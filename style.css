@@ -1,0 +1,101 @@
+body {
+    padding: 24px;
+    font-family: sans-serif;
+}
+
+span.welcome {
+    margin-top: 1em;
+    margin-bottom: 0.4em;
+    display: block;
+    text-align: right;
+    font-style: italic;
+    font-family: cursive;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: fantasy;
+    border-top: 0.2em solid red;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+form {
+    margin-bottom: 3rem;
+}
+select#publisher {
+    display: block;
+    width: 100%;
+    padding: 0.8em;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+input[type="number"] {
+    padding: 0.8em;
+    font-size: 1em;
+    border: 1px solid rgb(169, 169, 169);
+}
+
+input[type="submit"] {
+    padding: 1em 2em;
+    width: 100%;
+    background-color: red;
+    border: 1px solid #c40000;
+    font-size: 0.9em;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
+    font-weight: bold;
+    color: white;
+    background: #ff0000; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff0000 0%, #ff4444 94%, #ff5656 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ff0000 0%,#ff4444 94%,#ff5656 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ff0000 0%,#ff4444 94%,#ff5656 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#ff5656',GradientType=0 ); /* IE6-9 */
+}
+
+ul li {
+    font-size: 1.1rem;
+    margin-bottom: 1em;
+}
+
+#terr-select {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+#terr-select label {
+    width: 20%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#terr-select label:before {
+	content: attr(data-attr);
+	border: 1px solid red;
+	border-radius: 4px;
+	padding: 20px 0px;
+	display: inline-block;
+	width: 85%;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+#terr-select label:hover:before,
+#terr-select input:checked + label:before {
+	color: white;
+	font-weight: bold;
+	background: red;
+}
+
+#terr-select input {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
