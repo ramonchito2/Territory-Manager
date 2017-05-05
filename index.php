@@ -38,15 +38,18 @@ if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
 
 <ul>
 <?php
-foreach ($territoriesCOd as $territory): ?>
-	<li><?= $territory['name']; ?> (<?= count($territory['tco']); ?>)</li>
-	<ul>
-		<?php
-		foreach( $territory['tco'] as $t ): ?>
-		<li>Territory #<?= $t['id']; ?> - <?= $t['dco']; ?></li>
-		<?php
-		endforeach; ?>
-	</ul>
+$name = '';
+foreach ($territoriesCOd as $t):
+	$newName = $t['first_name'].$t['last_name'];
+	if( $name !== $newName ):
+		$name = $t['first_name'].$t['last_name']; ?>
+
+	<li><?= $t['first_name'] .' '. $t['last_name']; ?> - <?= date('M jS Y h:i:s a', $t['checked_out']); ?></li>
+	
+	<?php
+	endif;
+	?>
+	<span><?= $t['terr_num'] . ' - ' . date('M jS Y h:i:s a', $t['checked_out']); ?></span><br>
 <?php
 endforeach; ?>
 </ul>

@@ -91,12 +91,16 @@ else:
 endif;
 
 // get checked-out territories
-$ter_sql = "SELECT * FROM territory WHERE `group_name` = '".$group."' AND NOT `checked_out` IS NULL;";
+$ter_sql  = "SELECT territory.checked_out, territory.terr_num, user.first_name, user.last_name ";
+$ter_sql .= "FROM territory ";
+$ter_sql .= "INNER JOIN user on territory.user_iduser = user.iduser ";
+$ter_sql .= "WHERE `group_name` = '".$group."' ";
+$ter_sql .= "ORDER BY user.last_name, territory.checked_out DESC;";
 $ter_result = mysqli_query($conn, $ter_sql);
 $territoriesCOd = array();
 if (mysqli_num_rows($ter_result) > 0):
     while($row = mysqli_fetch_assoc($ter_result)):
-        $territoriesCOd[] = $row['terr_num'];
+        $territoriesCOd[] = $row;
     endwhile;
 else:
     echo "0 results";
