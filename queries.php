@@ -50,7 +50,7 @@ if ( isset($_POST['terrs']) && isset($_POST['publisher']) ):
 	if (!filter_var($pub, FILTER_VALIDATE_INT) === false):
 	    foreach( $terrs as $terr ):
 	    	if ( !filter_var($terr, FILTER_VALIDATE_INT) === false && $validData ):
-	    		$insert_sql .= "UPDATE territory SET checked_out = '".$currentTime."', user_iduser = '".$pub."' WHERE terr_num = '".$terr."';";
+	    		$insert_sql .= "UPDATE territories SET checkedOut = '".$currentTime."', userID_users = '".$pub."' WHERE terrNum = '".$terr."';";
 	    		$validData = true;
 	    	else:
 	    		$validData = false;
@@ -66,44 +66,38 @@ if ( isset($_POST['terrs']) && isset($_POST['publisher']) ):
 endif;
 
 // get publishers
-$pub_sql = "SELECT * FROM user WHERE `group` = '".$group."'";
+$pub_sql = "SELECT * FROM users WHERE `group` = '".$group."'";
 $pub_result = mysqli_query($conn, $pub_sql);
 $publishers = array();
 if (mysqli_num_rows($pub_result) > 0):
     while($row = mysqli_fetch_assoc($pub_result)):
-        $publishers[] = array("id" => $row["iduser"], "first" => $row["first_name"], "last" => $row["last_name"]);
+        $publishers[] = array("id" => $row["userID"], "first" => $row["firstName"], "last" => $row["lastName"]);
     endwhile;
-else:
-    echo "0 results";
 endif;
 $publishers = array_sort($publishers, 'last');
 
 // get checked-in territories
-$ter_sql = "SELECT * FROM territory WHERE `group_name` = '".$group."' AND `checked_out` IS NULL;";
+$ter_sql = "SELECT * FROM territories WHERE `group` = '".$group."' AND `checkedOut` IS NULL;";
 $ter_result = mysqli_query($conn, $ter_sql);
 $territories = array();
 if (mysqli_num_rows($ter_result) > 0):
     while($row = mysqli_fetch_assoc($ter_result)):
-        $territories[] = $row['terr_num'];
+        $territories[] = $row['terrNum'];
     endwhile;
-else:
-    echo "0 results";
 endif;
 
 // get checked-out territories
-$ter_sql  = "SELECT territory.checked_out, territory.terr_num, user.first_name, user.last_name ";
-$ter_sql .= "FROM territory ";
-$ter_sql .= "INNER JOIN user on territory.user_iduser = user.iduser ";
-$ter_sql .= "WHERE `group_name` = '".$group."' ";
-$ter_sql .= "ORDER BY user.last_name, territory.checked_out DESC;";
+$ter_sql  = "SELECT t.checkedOut, t.terrNum, u.firstName, u.lastName, u.userID ";
+$ter_sql .= "FROM territories t ";
+$ter_sql .= "INNER JOIN users u on t.userID_users = u.userID ";
+$ter_sql .= "WHERE u.group = '".$group."' ";
+$ter_sql .= "ORDER BY t.checkedOut ASC;";
 $ter_result = mysqli_query($conn, $ter_sql);
 $territoriesCOd = array();
 if (mysqli_num_rows($ter_result) > 0):
     while($row = mysqli_fetch_assoc($ter_result)):
         $territoriesCOd[] = $row;
     endwhile;
-else:
-    echo "0 results";
 endif;
 
 
@@ -144,6 +138,39 @@ function array_sort($array, $on, $order=SORT_ASC){
 
     return $new_array;
 }
+
+// FUNCTION TO GET TIME ELAPSED SINCE $datetime
+function time_elapsed_string($datetime, $wrap = false, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+    if (!$full) $string = array_slice($string, 0, 1);
+    $result = $string ? implode(', ', $string) . ' ago' : 'just now';
+    if ($wrap)
+    	$result = '<span class="ago '.implode(', ', $string).'">'.$result.'</span>';
+    return $result;
+}
+
 
 // SET TERRITORIES TO RESPECTIVE GROUP OWNERS
 /* $conn = mysqli_connect('localhost', 'root', 'root', 'terrapp');
