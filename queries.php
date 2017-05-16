@@ -59,13 +59,49 @@ if ( isset($_POST['terrs']) && isset($_POST['publisher']) ):
 	endif;
 	// INSERT VALID DATA
 	if ( $validData && mysqli_multi_query($conn, $insert_sql) ) {
-	    echo "Territorie(s) " . implode(', ',$terrs) . " were sucessfully assigned.";
+	    echo "<div class='msg'>Territorie(s) " . implode(', ',$terrs) . " were sucessfully assigned.</div>";
 	} else {
-	    echo "Error: " . $insert_sql . "<br>" . mysqli_error($conn);
+	    echo "<div class='msg err'>Error: " . $insert_sql . "<br>" . mysqli_error($conn) .'</div>';
 	}
 endif;
 
-// get publishers
+// CHECK-IN TERRITORY(IES)
+if( isset($_POST['tid']) && isset($_POST['uid']) && isset($_POST['time']) ):
+	
+	$currentTime = time();
+	$insert_sql = ''; $log = '';
+	$re = '/^\d+(?:,\d+)*$/'; // validate only nums & commas
+	$tid = $_POST['tid'];
+	$uid = $_POST['uid'];
+	$time = $_POST['time'];
+	$continue = true;
+	if ( !preg_match($re, $tid) || !preg_match($re, $uid) || !preg_match($re, $time) )
+		$continue = false;
+	if( $continue ):
+		$user  = filter_var($uid, FILTER_VALIDATE_INT);
+		$terrs = explode(',', $tid);
+		$time = explode(',', $time);
+		foreach( $terrs as $n => $terr ):
+			$t = filter_var($terr, FILTER_VALIDATE_INT);
+			$x = filter_var($time[$n], FILTER_VALIDATE_INT);
+			$insert_sql .= "UPDATE territories ";
+			$insert_sql .= "SET checkedOut = NULL, userID_users = NULL ";
+			$insert_sql .= "WHERE terrNum = ".$t." ";
+			$insert_sql .= "AND userID_users = ".$user.";";
+			$insert_sql .= "INSERT INTO log VALUES (NULL,".$user.",".$t.",".$x.",".time().");";
+		endforeach;
+		// INSERT VALID DATA
+		if ( mysqli_multi_query($conn, $insert_sql) ) {
+		    echo "<div class='msg'>Territory(ies) " . $tid . " were sucessfully checked in.</div>";
+		} else {
+		    echo "<div class='msg err'>Error: " . $insert_sql . "<br>" . mysqli_error($conn) .'</div>';
+		}
+	endif;
+
+endif;
+
+/* GET PUBLISHERS
+--- creates $publishers array(); */
 $pub_sql = "SELECT * FROM users WHERE `group` = '".$group."'";
 $pub_result = mysqli_query($conn, $pub_sql);
 $publishers = array();
@@ -76,7 +112,8 @@ if (mysqli_num_rows($pub_result) > 0):
 endif;
 $publishers = array_sort($publishers, 'last');
 
-// get checked-in territories
+/* GET CHECKED-IN TERRITORIES
+--- creates $territories array() */
 $ter_sql = "SELECT * FROM territories WHERE `group` = '".$group."' AND `checkedOut` IS NULL;";
 $ter_result = mysqli_query($conn, $ter_sql);
 $territories = array();
@@ -86,7 +123,8 @@ if (mysqli_num_rows($ter_result) > 0):
     endwhile;
 endif;
 
-// get checked-out territories
+/* GET CHECKED OUT TERRITORIES
+--- creates $territoriesCOd array() */
 $ter_sql  = "SELECT t.checkedOut, t.terrNum, u.firstName, u.lastName, u.userID ";
 $ter_sql .= "FROM territories t ";
 $ter_sql .= "INNER JOIN users u on t.userID_users = u.userID ";
@@ -170,25 +208,3 @@ function time_elapsed_string($datetime, $wrap = false, $full = false) {
     	$result = '<span class="ago '.implode(', ', $string).'">'.$result.'</span>';
     return $result;
 }
-
-
-// SET TERRITORIES TO RESPECTIVE GROUP OWNERS
-/* $conn = mysqli_connect('localhost', 'root', 'root', 'terrapp');
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql  = "UPDATE territory SET group_name = 'Stark' WHERE idterritory BETWEEN 1 AND 10;";
-$sql .= "UPDATE territory SET group_name = 'Grandview' WHERE idterritory BETWEEN 11 AND 20;";
-$sql .= "UPDATE territory SET group_name = 'Harris' WHERE idterritory BETWEEN 21 AND 30;";
-$sql .= "UPDATE territory SET group_name = 'Crisp' WHERE idterritory BETWEEN 31 AND 40;";
-$sql .= "UPDATE territory SET group_name = 'Salon' WHERE idterritory BETWEEN 41 AND 49;";
-$sql .= "UPDATE territory SET group_name = 'Calle 89' WHERE idterritory BETWEEN 50 AND 58;";
-
-if (mysqli_multi_query($conn, $sql)) {
-    echo "New records created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-mysqli_close($conn); */

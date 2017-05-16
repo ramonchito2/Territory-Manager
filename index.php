@@ -83,7 +83,8 @@ include('queries.php'); ?>
 							<span class="details"
 								name="<?= $fullName; ?>"
 								id="<?= $tt['userID']; ?>"
-								tid="<?= $tt['terrNum']; ?>"></span>
+								tid="<?= $tt['terrNum']; ?>"
+								time="<?= $tt['checkedOut']; ?>"></span>
 						</a>
 						<span class="codate">
 							<?php
@@ -119,6 +120,7 @@ include('queries.php'); ?>
 		<form id="chIn" method="post">
 			<input id="uid" type="hidden" name="uid">
 			<input id="tid" type="hidden" name="tid">
+			<input id="time" type="hidden" name="time">
 		</form>
 	</div>
 </div>

@@ -11,6 +11,19 @@ body {
 	transition: all 0.26s ease;
 }
 
+.msg {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    right: 1em;
+    padding: 1em 2em;
+    background: #61c8f1;
+    border: 1px solid #137ba4;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
 span.welcome {
     margin-top: 1em;
     margin-bottom: 0.4em;

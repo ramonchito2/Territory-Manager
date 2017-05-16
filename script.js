@@ -12,20 +12,22 @@ $(document).ready(function(){
 				name 	= details.attr('name'),
 				id 		= details.attr('id'),
 				tid		= details.attr('tid'),
+				time	= details.attr('time'),
 				msg 	= 'Are you sure you want check in Terr #'+tid+' for '+name+'?';
-			openPop(msg,name,tid,id);
+			openPop(msg,name,tid,id,time);
 		} else { /* ... group of terrs */
-			var id, tid = [],
-				name = $(this).siblings('h3').text(),
-				terrs = $(this).parent('.user').next('.tco').find('.terrDetails');
+			var id, tid = [], time = [],
+				name  	= $(this).siblings('h3').text(),
+				terrs 	= $(this).parent('.user').next('.tco').find('.terrDetails');
 			terrs.each(function(ix, el){
 				var d = $(this).find('.details');
 				id = d.attr('id');
 				tid.push(d.attr('tid'));
+				time.push(d.attr('time'));
 			});
 			terrs = tid.join(',');
 			msg = 'Are you sure you want check in all territories belonging to '+name+'? ( '+terrs+' )';
-			openPop(msg,name,terrs,id);
+			openPop(msg,name,terrs,id,time);
 		}
 	})
 
@@ -34,12 +36,13 @@ $(document).ready(function(){
 	})
 
 	/* Open Popup */
-	openPop = function(msg,name,tid,id) {
+	openPop = function(msg,name,tid,id,time) {
 		$mainContainer.addClass('blur');
 		$popup.addClass('show')
 			.find('h3').text(msg).end()
 			.find('form #uid').val(id).end()
-			.find('form #tid').val(tid);
+			.find('form #tid').val(tid).end()
+			.find('form #time').val(time);
 	}
 
 	/* Resets popup form and hides stuff */
