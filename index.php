@@ -99,6 +99,7 @@ include('queries.php'); ?>
 						</a>
 						<span class="codate">
 							<?php
+							date_default_timezone_set("America/Chicago");
 							$daysAgo = time_elapsed_string('@'.$t[$key]['checkedOut']);
 							$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
 							Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
