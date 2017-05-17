@@ -2,6 +2,7 @@
 * {
 	box-sizing: border-box;
 }
+
 body {
     padding: 24px;
     font-family: sans-serif;
@@ -22,6 +23,13 @@ body {
     border-radius: 4px;
     text-align: center;
     font-size: 0.9em;
+    transform: translateY(-150%);
+    animation: 7s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0s 1 showMessage;
+}
+
+.msg.err {
+	background: rgb(255, 124, 0);
+	border-color: #ff4400;
 }
 
 span.welcome {
@@ -49,9 +57,11 @@ h3 {
 	margin-bottom: 0px;
 	margin-top: 0;
 }
+
 form#chOut {
     margin-bottom: 3rem;
 }
+
 select#publisher {
     display: block;
     width: 100%;
@@ -75,6 +85,7 @@ input[type="submit"] {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
     font-weight: bold;
     color: white;
+    cursor: pointer;
     background: #ff0000; /* Old browsers */
     background: -moz-linear-gradient(top, #ff0000 0%, #ff4444 94%, #ff5656 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #ff0000 0%,#ff4444 94%,#ff5656 100%); /* Chrome10-25,Safari5.1-6 */
@@ -292,4 +303,19 @@ span.ago.years {
 	background: red;
 	color: rgba(255, 255, 255, 0.96);
 	margin-right: .5em;
+}
+
+@keyframes showMessage {
+    0% {
+        transform: translateY(-150%);
+    }
+    10% {
+    	transform: translateY(0);
+    }
+    90% {
+		transform: translateY(0);
+    } 
+    100% {
+        transform: translateY(-150%);
+    }
 }

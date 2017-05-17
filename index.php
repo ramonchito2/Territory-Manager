@@ -1,22 +1,33 @@
-<?php session_start(); ?>
+<?php
+// DB QUERIES GO HERE
+include('queries.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta HTTP-EQUIV="Pragma" content="no-cache">
+<meta HTTP-EQUIV="Expires" content="-1" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<?php // CHECK IF $POST ALREADY SUBMITTED
-if( isset($_SESSION['indicator']) ):
-	$takeNoAction = true;
-else:
-    $_SESSION['indicator'] = "processed"; 
-endif;
+<?php if( isset($_GET['msg']) || isset($_GET['err']) ):
 
-// DB QUERIES GO HERE
-include('queries.php'); ?>
+	if( isset($_GET['err']) ):
+		$msg = $_GET['err'];
+		$cls = 'msg err';
+	else:
+		$msg = $_GET['msg'];
+		$cls = 'msg';
+	endif;
+
+	?>
+	<script>history.pushState('', document.title, window.location.pathname);</script>
+	<div class="<?= $cls; ?>"><?= $msg; ?></div>
+
+<?php endif; ?>
 
 <section id="main-container">
 
