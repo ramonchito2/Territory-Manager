@@ -1,35 +1,33 @@
 <?php
 // GET RESULTS FOR...
-$group = "Calle 89";
+$group = null;
 
 // GROUP OVERSEERS
-switch ($group) {
-	case 'Calle 89':
-		$go = 'Jirrod';
+$current_user = wp_get_current_user();
+$go = $current_user->user_firstname;
+switch ($go) {
+	case 'Jirrod':
+		$group = 'Calle 89';
 		break;
 	
-	case 'Salon':
-		$go = 'Jose';
+	case 'Jose':
+		$group = 'Salon';
 		break;
 	
-	case 'Grandview':
-		$go = 'Raul';
+	case 'Raul':
+		$group = 'Grandview';
 		break;
 	
-	case 'Crisp':
-		$go = 'Josue';
+	case 'Josue':
+		$group = 'Crisp';
 		break;
 	
-	case 'Stark':
-		$go = 'Enrique';
+	case 'Enrique':
+		$group = 'Stark';
 		break;
 	
-	case 'Harris':
-		$go = 'Armando';
-		break;
-	
-	default:
-		$go = 'Admin';
+	case 'Armando':
+		$group = 'Harris';
 		break;
 }
 

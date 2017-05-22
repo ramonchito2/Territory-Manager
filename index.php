@@ -1,157 +1,67 @@
 <?php
-// DB QUERIES GO HERE
-include('queries.php'); ?>
+/**
+ * The main template file
+ *
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package WordPress
+ * @subpackage Twenty_Seventeen
+ * @since 1.0
+ * @version 1.0
+ */
 
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta HTTP-EQUIV="Pragma" content="no-cache">
-<meta HTTP-EQUIV="Expires" content="-1" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+get_header(); ?>
 
-<?php if( isset($_GET['msg']) || isset($_GET['err']) ):
+<div class="wrap">
+	<?php if ( is_home() && ! is_front_page() ) : ?>
+		<header class="page-header">
+			<h1 class="page-title"><?php single_post_title(); ?></h1>
+		</header>
+	<?php else : ?>
+	<header class="page-header">
+		<h2 class="page-title"><?php _e( 'Posts', 'twentyseventeen' ); ?></h2>
+	</header>
+	<?php endif; ?>
 
-	if( isset($_GET['err']) ):
-		$msg = $_GET['err'];
-		$cls = 'msg err';
-	else:
-		$msg = $_GET['msg'];
-		$cls = 'msg';
-	endif;
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-	?>
-	<script>history.pushState('', document.title, window.location.pathname);</script>
-	<div class="<?= $cls; ?>"><?= $msg; ?></div>
+			<?php
+			if ( have_posts() ) :
 
-<?php endif; ?>
+				/* Start the Loop */
+				while ( have_posts() ) : the_post();
 
-<section id="main-container">
+					/*
+					 * Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part( 'template-parts/post/content', get_post_format() );
 
-	<span class="welcome">Welcome <?= $go; ?></span>
-	<h1>Manage Group Territories</h1>
+				endwhile;
 
-	<h2>Assign Territory</h2>
+				the_posts_pagination( array(
+					'prev_text' => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
+					'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
+					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
+				) );
 
+			else :
 
-	<form id="chOut" method="post">
-		<select name="publisher" id="publisher">
-			<?php foreach($publishers as $publisher): ?>
-			<option value="<?= $publisher['id']; ?>"><?= $publisher['last'] . ', ' . $publisher['first']; ?></option>
-			<?php endforeach; ?>
-		</select>
-		<div id="terr-select">
-			<?php foreach($territories as $territory): ?>
-			<input type="checkbox" name="terrs[]" value="<?= $territory; ?>" id="terr<?= $territory; ?>">
-			<label for="terr<?= $territory; ?>" data-attr="<?= $territory; ?>"></label>
-			<?php endforeach; ?>
-		</div>
-		<input type="hidden" placeholder="Territory Number(s)">
-		<input type="submit" value="Assign">
-	</form>
+				get_template_part( 'template-parts/post/content', 'none' );
 
+			endif;
+			?>
 
-	<?php
-	if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	<?php get_sidebar(); ?>
+</div><!-- .wrap -->
 
-	<h2>Territories Checked Out</h2>
-
-	<?php
-	$tco = array();
-
-	// Group each user and territories into it's own array
-	// keeps queried order
-	foreach ($territoriesCOd as $key => $item) {
-		$tco[$item['userID']][$key] = $item;
-	}
-	// dd($+tco);
-
-	foreach ($tco as $t): 
-		reset($t);
-		$key = key($t); ?>
-
-		<div class="userWterrs">
-			<div class="user">
-				<?php $fullName = $t[$key]['firstName'] .' '. $t[$key]['lastName']; ?>
-				<h3><?= $fullName; ?></h3>
-				<i>oldest - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
-				<a class="checkin all">
-					<span class="cin"><i class="fa fa-check"></i>in</span> ALL
-				</a>			
-			</div>
-			
-			<div class="tco">
-			
-				<?php
-				foreach ($t as $tt): ?>
-					<div class="terrDetails">
-						<h4 class="tnum">Terr #<?= $tt['terrNum']; ?> - </h4>
-						<a class="checkin">
-							<span class="cin"><i class="fa fa-check"></i>in</span>
-							<span class="details"
-								name="<?= $fullName; ?>"
-								id="<?= $tt['userID']; ?>"
-								tid="<?= $tt['terrNum']; ?>"
-								time="<?= $tt['checkedOut']; ?>"></span>
-						</a>
-						<span class="codate">
-							<?php
-							date_default_timezone_set("America/Chicago");
-							$daysAgo = time_elapsed_string('@'.$t[$key]['checkedOut']);
-							$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
-							Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
-						</span>
-					</div>
-				<?php
-				endforeach; ?>
-
-			</div>
-		</div>
-
-	<?php 
-	endforeach; ?>
-
-	<?php
-	else: ?>
-
-	<h2>No Territories Checked Out</h2>
-	<span>You can check out a territory above.</span>
-	<?php
-	endif; ?>
-
-</section>
-
-<div id="popup">
-	<div id="pcontainer">
-		<h3>Nothing to see here...</h3>
-		<span class="yes">Yes</span>
-		<span class="no" onclick="resetPop()">Cancel</span>
-		<form id="chIn" method="post">
-			<input id="uid" type="hidden" name="uid">
-			<input id="tid" type="hidden" name="tid">
-			<input id="time" type="hidden" name="time">
-		</form>
-	</div>
-</div>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
-    <defs>
-        <filter id="blur-filter">
-            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
-        </filter>
-    </defs>
-</svg>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
-
-<?php
-
-function dd($data) {
-	highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
-	die();
-}
+<?php get_footer();
