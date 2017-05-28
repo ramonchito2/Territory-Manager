@@ -42,7 +42,10 @@ include('queries.php'); ?>
 	<form id="chOut" method="post">
 		<select name="publisher" id="publisher">
 			<?php foreach($publishers as $publisher): ?>
-			<option value="<?= $publisher['id']; ?>"><?= $publisher['last'] . ', ' . $publisher['first']; ?></option>
+			<option
+				group="<?= $publisher['group']; ?>"
+				value="<?= $publisher['id']; ?>"><?= $publisher['last'] . ', ' . $publisher['first']; ?>
+			</option>
 			<?php endforeach; ?>
 		</select>
 		<div id="terr-select">
@@ -79,6 +82,9 @@ include('queries.php'); ?>
 			<div class="user">
 				<?php $fullName = $t[$key]['firstName'] .' '. $t[$key]['lastName']; ?>
 				<h3><?= $fullName; ?></h3>
+				<?php if( current_user_can('edit_others_pages') ): ?>
+					<span class="ugroup"><?= $t[$key]['group']; ?></span>
+				<?php endif; ?>
 				<i>oldest - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
 				<a class="checkin all">
 					<span class="cin"><i class="fa fa-check"></i>in</span> ALL
