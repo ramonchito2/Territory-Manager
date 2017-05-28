@@ -8,6 +8,10 @@ body {
     font-family: sans-serif;
 }
 
+.hidden {
+	display: none !important;
+}
+
 #main-container {
 	transition: all 0.26s ease;
 }
@@ -188,9 +192,11 @@ input[type="submit"] {
 }
 
 #terr-select input {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
+    height: 0;
+    width: 0;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .userWterrs {

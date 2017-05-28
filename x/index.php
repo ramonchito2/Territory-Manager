@@ -39,7 +39,7 @@ include('queries.php'); ?>
 	<h2>Assign Territory</h2>
 
 	<?php if( current_user_can('edit_others_pages') ): ?>
-	<select id="group">
+	<select id="group" onchange="groupFilter()">
 		<option>All Groups</option>
 		<option>Calle 89</option>
 		<option>Crisp</option>
@@ -52,17 +52,19 @@ include('queries.php'); ?>
 
 	<form id="chOut" method="post">
 		<select name="publisher" id="publisher">
-			<?php foreach($publishers as $publisher): ?>
-			<option
-				group="<?= $publisher['group']; ?>"
-				value="<?= $publisher['id']; ?>"><?= $publisher['last'] . ', ' . $publisher['first']; ?>
-			</option>
+			<?php 
+			foreach($publishers as $publisher): 
+				$pg 	= $publisher['group'];
+				$pid	= $publisher['id'];
+				$pname 	= $publisher['last'] . ', ' . $publisher['first']; 
+			?>
+			<option	group="<?= $pg; ?>"	value="<?= $pid; ?>"><?= $pname; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<div id="terr-select">
 			<?php foreach($territories as $territory): ?>
-			<input type="checkbox" name="terrs[]" value="<?= $territory; ?>" id="terr<?= $territory; ?>">
-			<label for="terr<?= $territory; ?>" data-attr="<?= $territory; ?>"></label>
+			<input type="checkbox" name="terrs[]" value="<?= $territory['id']; ?>" id="terr<?= $territory['id']; ?>">
+			<label group="<?= $territory['group']; ?>" for="terr<?= $territory['id']; ?>" data-attr="<?= $territory['id']; ?>"></label>
 			<?php endforeach; ?>
 		</div>
 		<input type="hidden" placeholder="Territory Number(s)">
@@ -75,71 +77,75 @@ include('queries.php'); ?>
 
 	<h2>Territories Checked Out</h2>
 
-	<?php
-	$tco = array();
+	<div id="all-checkedout">
 
-	// Group each user and territories into it's own array
-	// keeps queried order
-	foreach ($territoriesCOd as $key => $item) {
-		$tco[$item['userID']][$key] = $item;
-	}
-	// dd($+tco);
+		<?php
+		$tco = array();
 
-	foreach ($tco as $t): 
-		reset($t);
-		$key = key($t); ?>
+		// Group each user and territories into it's own array
+		// keeps queried order
+		foreach ($territoriesCOd as $key => $item) {
+			$tco[$item['userID']][$key] = $item;
+		}
+		// dd($+tco);
 
-		<div class="userWterrs">
-			<div class="user">
-				<?php $fullName = $t[$key]['firstName'] .' '. $t[$key]['lastName']; ?>
-				<h3><?= $fullName; ?></h3>
-				<?php if( current_user_can('edit_others_pages') ): ?>
-					<span class="ugroup"><?= $t[$key]['group']; ?></span>
-				<?php endif; ?>
-				<i>oldest - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
-				<a class="checkin all">
-					<span class="cin"><i class="fa fa-check"></i>in</span> ALL
-				</a>			
+		foreach ($tco as $t): 
+			reset($t);
+			$key = key($t); ?>
+
+			<div group="<?= $t[$key]['group']; ?>" class="userWterrs">
+				<div class="user">
+					<?php $fullName = $t[$key]['firstName'] .' '. $t[$key]['lastName']; ?>
+					<h3><?= $fullName; ?></h3>
+					<?php if( current_user_can('edit_others_pages') ): ?>
+						<span class="ugroup"><?= $t[$key]['group']; ?></span>
+					<?php endif; ?>
+					<i>oldest - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
+					<a class="checkin all">
+						<span class="cin"><i class="fa fa-check"></i>in</span> ALL
+					</a>			
+				</div>
+				
+				<div class="tco">
+				
+					<?php
+					foreach ($t as $tt): ?>
+						<div class="terrDetails">
+							<h4 class="tnum">Terr #<?= $tt['terrNum']; ?> - </h4>
+							<a class="checkin">
+								<span class="cin"><i class="fa fa-check"></i>in</span>
+								<span class="details"
+									name="<?= $fullName; ?>"
+									id="<?= $tt['userID']; ?>"
+									tid="<?= $tt['terrNum']; ?>"
+									time="<?= $tt['checkedOut']; ?>"></span>
+							</a>
+							<span class="codate">
+								<?php
+								date_default_timezone_set("America/Chicago");
+								$daysAgo = time_elapsed_string('@'.$t[$key]['checkedOut']);
+								$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
+								Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
+							</span>
+						</div>
+					<?php
+					endforeach; ?>
+
+				</div>
 			</div>
-			
-			<div class="tco">
-			
-				<?php
-				foreach ($t as $tt): ?>
-					<div class="terrDetails">
-						<h4 class="tnum">Terr #<?= $tt['terrNum']; ?> - </h4>
-						<a class="checkin">
-							<span class="cin"><i class="fa fa-check"></i>in</span>
-							<span class="details"
-								name="<?= $fullName; ?>"
-								id="<?= $tt['userID']; ?>"
-								tid="<?= $tt['terrNum']; ?>"
-								time="<?= $tt['checkedOut']; ?>"></span>
-						</a>
-						<span class="codate">
-							<?php
-							date_default_timezone_set("America/Chicago");
-							$daysAgo = time_elapsed_string('@'.$t[$key]['checkedOut']);
-							$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
-							Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
-						</span>
-					</div>
-				<?php
-				endforeach; ?>
 
-			</div>
-		</div>
+		<?php 
+		endforeach; ?>
 
-	<?php 
-	endforeach; ?>
+		<?php
+		else: ?>
 
-	<?php
-	else: ?>
+		<h2>No Territories Checked Out</h2>
+		<span>You can check out a territory above.</span>
+		<?php
+		endif; ?>
 
-	<h2>No Territories Checked Out</h2>
-	<span>You can check out a territory above.</span>
-	<?php
-	endif; ?>
+	</div>
 
 </section>
 

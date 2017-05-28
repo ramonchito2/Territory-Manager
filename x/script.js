@@ -53,5 +53,34 @@ $(document).ready(function(){
 		$('#main-container').removeClass('blur');
 	}
 
+	/* Admin group filter */
+	select = document.getElementById("group");
+	if( select ) {
+	    groupFilter = function() {
+	        filter = select.value.toUpperCase();
+	        values = document.querySelectorAll("#publisher option, #terr-select label, #all-checkedout .userWterrs");
+
+	        // Loop through all values, and hide those who are in the requested group
+	        for (i = 0; i < values.length; i++) {
+	            value = values[i].getAttribute("group");
+	            if (value) {
+	            	// console.log(filter);
+	                if( filter == "ALL GROUPS" ) {
+	                	values[i].classList.remove('hidden');
+	                } else {
+	                	valueMatch = value.toUpperCase().indexOf(filter) > -1;
+	                	// console.log('value match is '+valueMatch);
+	                	// clear publisher name value
+	                	document.getElementById('publisher').value = '';
+	                	if (valueMatch) {
+	                	    values[i].classList.remove('hidden');
+	                	} else {
+	                	    values[i].classList.add('hidden');
+	                	}
+	                }
+	            }
+	        }
+	    }
+	}
 
 })

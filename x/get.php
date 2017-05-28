@@ -16,7 +16,12 @@ $pub_result = mysqli_query($conn, $pub_sql);
 $publishers = array();
 if (mysqli_num_rows($pub_result) > 0):
     while($row = mysqli_fetch_assoc($pub_result)):
-        $publishers[] = array("id" => $row["userID"], "first" => $row["firstName"], "last" => $row["lastName"]);
+        $publishers[] = array(
+        	"id" => $row["userID"],
+        	"first" => $row["firstName"],
+        	"last" => $row["lastName"],
+        	"group" => $row["group"]
+        );
     endwhile;
 endif;
 $publishers = array_sort($publishers, 'last');
@@ -28,7 +33,10 @@ $ter_result = mysqli_query($conn, $ter_sql);
 $territories = array();
 if (mysqli_num_rows($ter_result) > 0):
     while($row = mysqli_fetch_assoc($ter_result)):
-        $territories[] = $row['terrNum'];
+        $territories[] = array(
+        	"id" => $row['terrNum'],
+        	"group" => $row['group']
+        );
     endwhile;
 endif;
 
