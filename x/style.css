@@ -69,6 +69,24 @@ h3 {
 	margin-top: 0;
 }
 
+select#group {
+	display: inline-block;
+	width: 40%;
+	padding: 0.8em;
+	font-size: 1em;
+	margin-bottom: 1em;
+	float: right;
+	margin-top: -56px;
+}
+
+@media( max-width: 320px ) {
+	select#group {
+		display: block;
+		width: 100%;
+		margin: 0 0 1em;
+	}
+}
+
 form#chOut {
     margin-bottom: 3rem;
 }
@@ -116,6 +134,7 @@ input[type="submit"] {
     display: inline-block;
     box-sizing: border-box;
     margin-bottom: 10px;
+    padding: 0 8px;
 }
 
 #terr-select label:before {
@@ -124,7 +143,7 @@ input[type="submit"] {
 	border-radius: 4px;
 	padding: 20px 0px;
 	display: inline-block;
-	width: 85%;
+	width: 100%;
 	text-align: center;
 	cursor: pointer;
 	transition: all 0.3s ease;
@@ -135,6 +154,12 @@ input[type="submit"] {
 	color: white;
 	font-weight: bold;
 	background: red;
+}
+
+@media( max-width: 320px ) {
+	#terr-select label {
+		width: 25%;
+	}
 }
 
 @media( min-width: 767px ) {
@@ -153,13 +178,12 @@ input[type="submit"] {
 @media( min-width: 1024px ) {
 	#terr-select label {
 		width: auto;
-		/* padding: 0 20px; */
 		position: relative;
 	}
 	#terr-select label:before {
-		width: auto;
+		width: 1.6em;
 		padding: 20px;
-		margin-right: 1em;
+		/* margin-right: 1em; */
 	}
 }
 

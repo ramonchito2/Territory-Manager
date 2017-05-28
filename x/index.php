@@ -38,6 +38,17 @@ include('queries.php'); ?>
 
 	<h2>Assign Territory</h2>
 
+	<?php if( current_user_can('edit_others_pages') ): ?>
+	<select id="group">
+		<option>All Groups</option>
+		<option>Calle 89</option>
+		<option>Crisp</option>
+		<option>Grandview</option>
+		<option>Harris</option>
+		<option>Salon</option>
+		<option>Stark</option>
+	</select>
+	<?php endif; ?>
 
 	<form id="chOut" method="post">
 		<select name="publisher" id="publisher">
