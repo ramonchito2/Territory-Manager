@@ -56,13 +56,14 @@ if( $checkingIn ):
 		endforeach;
 		// INSERT VALID DATA
 		if ( mysqli_multi_query($conn, $insert_sql) ) {
-		    $msg = "?msg=Territory(ies) " . $tid . " were sucessfully checked in.";
+		    $msg = get_bloginfo('url')."?msg=Territory(ies) " . $tid . " were sucessfully checked in.";
 		} else {
-		    $msg = "?err=Error: " . $insert_sql . mysqli_error($conn);
+		    $msg = get_bloginfo('url')."?err=Error: " . $insert_sql . mysqli_error($conn);
 		}
 	endif;
 
 endif;
 
 mysqli_close($conn);
-header('Location:/'.$msg);
+?>
+<script>window.location.replace('<?= $msg; ?>')</script>
