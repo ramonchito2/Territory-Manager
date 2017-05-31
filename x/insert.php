@@ -65,5 +65,5 @@ if( $checkingIn ):
 endif;
 
 mysqli_close($conn);
+header('Location:'.$msg);
 ?>
-<script>window.location.replace('<?= $msg; ?>')</script>

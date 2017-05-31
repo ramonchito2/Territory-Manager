@@ -1,5 +1,4 @@
 <?php
-wp_head();
 
 include('tapplogin.php');
 
@@ -13,6 +12,7 @@ include('queries.php'); ?>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?= get_bloginfo('template_url'); ?>/x/style.css">
+<?php wp_head(); ?>
 </head>
 <body>
 
@@ -53,6 +53,7 @@ include('queries.php'); ?>
 
 	<form id="chOut" method="post">
 		<select name="publisher" id="publisher">
+			<option value="" disabled selected>Select a publisher...</option>
 			<?php 
 			foreach($publishers as $publisher): 
 				$pg 	= $publisher['group'];
