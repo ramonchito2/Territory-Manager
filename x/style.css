@@ -59,7 +59,7 @@ span.welcome {
 h1 {
     font-size: 3rem;
     font-family: Roboto, sans-serif;
-    border-top: 0.2em solid red;
+    border-top: 0.2em solid #0095ff;
     margin-top: 0;
     font-weight: 900;
 }
@@ -115,19 +115,19 @@ input[type="number"] {
 input[type="submit"] {
     padding: 1em 2em;
     width: 100%;
-    background-color: red;
-    border: 1px solid #c40000;
+    background-color: #0095ff;
+    border: 1px solid #0166ad;
     font-size: 0.9em;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
     font-weight: bold;
     font-family: Roboto, sans-serif;
     color: white;
     cursor: pointer;
-    background: #ff0000; /* Old browsers */
-    background: -moz-linear-gradient(top, #ff0000 0%, #ff4444 94%, #ff5656 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #ff0000 0%,#ff4444 94%,#ff5656 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #ff0000 0%,#ff4444 94%,#ff5656 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#ff5656',GradientType=0 ); /* IE6-9 */
+     /* Old browsers */
+     /* FF3.6-15 */
+     /* Chrome10-25,Safari5.1-6 */
+     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+     /* IE6-9 */
 }
 
 #terr-select {
@@ -147,7 +147,7 @@ input[type="submit"] {
 
 #terr-select label:before {
 	content: attr(data-attr);
-	border: 1px solid red;
+	border: 1px solid #0095ff;
 	border-radius: 4px;
 	padding: 20px 0px;
 	display: inline-block;
