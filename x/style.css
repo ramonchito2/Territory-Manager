@@ -106,6 +106,16 @@ select#publisher {
     font-family: Roboto, sans-serif;
 }
 
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
+
 input[type="number"] {
     padding: 0.8em;
     font-size: 1em;

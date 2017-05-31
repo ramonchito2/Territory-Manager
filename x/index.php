@@ -3,15 +3,27 @@
 include('tapplogin.php');
 
 // DB QUERIES GO HERE
-include('queries.php'); ?>
+include('queries.php'); 
+
+if( IS_PRODUCTION_SERVER )
+	$version = '?v=1.0';
+else
+	$version = null;
+?>
 
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="152x152" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/manifest.json">
+<link rel="mask-icon" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/safari-pinned-tab.svg" color="#d55b5b">
+<meta name="theme-color" content="#fafafa">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<?= get_bloginfo('template_url'); ?>/x/style.css">
+<link rel="stylesheet" href="<?= get_bloginfo('template_url'); ?>/x/style.css<?= $version; ?>">
 <?php wp_head(); ?>
 </head>
 <body>
@@ -52,7 +64,7 @@ include('queries.php'); ?>
 	<?php endif; ?>
 
 	<form id="chOut" method="post">
-		<select name="publisher" id="publisher">
+		<select name="publisher" id="publisher" required>
 			<option value="" disabled selected>Select a publisher...</option>
 			<?php 
 			foreach($publishers as $publisher): 
