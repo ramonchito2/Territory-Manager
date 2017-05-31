@@ -26,7 +26,7 @@ input {
 p.login-submit .button {
     width: 100%;
     display: block;
-    background: red;
+    background: #f47c48;
     color: white;
     font-weight: bold;
 }

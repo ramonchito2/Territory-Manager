@@ -15,12 +15,12 @@ else
 <html lang="en-us">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="apple-touch-icon" sizes="152x152" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/favicon-16x16.png">
-<link rel="manifest" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/manifest.json">
-<link rel="mask-icon" href="<?= get_bloginfo('template_url'); ?>/assets/images/favicons/safari-pinned-tab.svg" color="#d55b5b">
-<meta name="theme-color" content="#fafafa">
+<link rel="apple-touch-icon" sizes="180x180" href="<?= get_bloginfo('template_url');?>/assets/images/favicons/apple-touch-iconn.png">
+<link rel="icon" type="image/png" sizes="32x32" href="<?= get_bloginfo('template_url');?>/assets/images/favicons/faviconn-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="<?= get_bloginfo('template_url');?>/assets/images/favicons/faviconn-16x16.png">
+<link rel="manifest" href="<?= get_bloginfo('template_url');?>/assets/images/favicons/manifest.json">
+<link rel="mask-icon" href="<?= get_bloginfo('template_url');?>/assets/images/favicons/safari-pinned-tabb.svg" color="#f47c48">
+<meta name="theme-color" content="#f47c48">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?= get_bloginfo('template_url'); ?>/x/style.css<?= $version; ?>">
