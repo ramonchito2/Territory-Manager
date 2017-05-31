@@ -6,7 +6,7 @@ include('tapplogin.php');
 include('queries.php'); 
 
 if( IS_PRODUCTION_SERVER )
-	$version = '?v=1.0';
+	$version = '?v=1.1';
 else
 	$version = null;
 ?>
