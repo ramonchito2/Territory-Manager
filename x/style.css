@@ -53,14 +53,15 @@ span.welcome {
     display: block;
     text-align: right;
     font-style: italic;
-    font-family: cursive;
+    font-family: Roboto, sans-serif;
 }
 
 h1 {
     font-size: 3rem;
-    font-family: fantasy;
+    font-family: Roboto, sans-serif;
     border-top: 0.2em solid red;
     margin-top: 0;
+    font-weight: 900;
 }
 
 h2 {
@@ -81,6 +82,7 @@ select#group {
 	margin-bottom: 1em;
 	float: right;
 	margin-top: -56px;
+	font-family: Roboto, sans-serif;
 }
 
 @media( max-width: 320px ) {
@@ -101,6 +103,7 @@ select#publisher {
     padding: 0.8em;
     font-size: 1em;
     margin-bottom: 1em;
+    font-family: Roboto, sans-serif;
 }
 
 input[type="number"] {
@@ -117,6 +120,7 @@ input[type="submit"] {
     font-size: 0.9em;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
     font-weight: bold;
+    font-family: Roboto, sans-serif;
     color: white;
     cursor: pointer;
     background: #ff0000; /* Old browsers */
