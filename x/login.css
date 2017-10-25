@@ -1,13 +1,21 @@
 html, body {
-    position: relative;
-    width: 100%;
+    display: flex;
     height: 100%;
+    width: 100%;
+    margin: 0;
 }
+
 section.loginForm {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    flex: 1;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.loginForm img {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
 }
 
 label {
@@ -17,10 +25,12 @@ label {
     display: block;
 }
 
-input {
+input:not([type="checkbox"]) {
     border: 1px solid #ddd;
     padding: 0.8em 1em;
     border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 p.login-submit .button {

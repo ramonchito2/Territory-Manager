@@ -21,7 +21,8 @@ body {
 
 @media( min-width: 1024px ) {
 	#main-container {
-		margin-bottom: 2rem;
+		margin: 0 auto 2rem;
+		max-width: 1024px;
 	}
 	#main-container:after {
 		content: '';
@@ -129,7 +130,7 @@ input[type="submit"] {
     padding: 1em 2em;
     width: 100%;
     background-color: #f47c48;
-    border: 1px solid #0166ad;
+    border: 1px solid #c23b00;
     font-size: 0.9em;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
     font-weight: bold;
@@ -330,6 +331,10 @@ span.ago.years {
 }
 
 @media( min-width: 1024px ) {
+    #all-checkedout {
+        display: flex;
+        flex-wrap: wrap;
+    }
 	.userWterrs {
 		float: left;
 		width: 48%;

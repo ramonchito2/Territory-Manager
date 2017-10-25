@@ -58,7 +58,6 @@ else
 		<option>Crisp</option>
 		<option>Grandview</option>
 		<option>Harris</option>
-		<option>Salon</option>
 		<option>Stark</option>
 	</select>
 	<?php endif; ?>
