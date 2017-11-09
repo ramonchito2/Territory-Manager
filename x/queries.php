@@ -11,7 +11,7 @@ switch ($go) {
 		break;
 	
 	case 'Jose':
-		$group = 'Salon';
+		$group = 'Calle 89';
 		break;
 	
 	case 'Raul':
@@ -23,7 +23,7 @@ switch ($go) {
 		break;
 	
 	case 'Enrique':
-		$group = 'Stark';
+		$group = 'Salon';
 		break;
 	
 	case 'Armando':
