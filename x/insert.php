@@ -21,7 +21,7 @@ if ( $checkingOut ):
 	if( $validData ):
 		if ( mysqli_multi_query($conn, $insert_sql) ) {
 			$terrNumbs = implode(', ',$terrs);
-			if ( count($terrs > 1) ):
+			if ( count($terrs) > 1 ):
 				$msg = "?msg=Territorios " . $terrNumbs . " fueron asignados con éxito.";
 			else:
 				$msg = "?msg=Territorio " . $terrNumbs . " fue asignado con éxito.";
@@ -61,7 +61,7 @@ if( $checkingIn ):
 		endforeach;
 		// INSERT VALID DATA
 		if ( mysqli_multi_query($conn, $insert_sql) ) {
-			if ( count($terrs > 1) ):
+			if ( count($terrs) > 1 ):
 				$msg = get_bloginfo('url')."?msg=Territorios " . $tid . " fueron asignados con éxito.";
 			else:
 				$msg = get_bloginfo('url')."?msg=Territorio " . $tid . " fue asignado con éxito.";

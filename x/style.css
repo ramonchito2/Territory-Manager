@@ -26,7 +26,7 @@ body {
     box-shadow: 5px 0px 15px rgba(0,0,0,.24);
     z-index: 10;
     transform: translate3d(-100%,0, 0);
-    transition: transform 0.2s cubic-bezier(0.18, 1.15, 0.17, 1.14);
+    transition: transform 0.2s cubic-bezier(0, 1.21, 0.54, 0.97);
 }
 
 body.menuOpen #menu {
@@ -121,6 +121,12 @@ body.menuOpen #menu {
     display: none;
 }
 
+@media( max-width: 640px ) {
+    #menu-button {
+        left: 40px;
+    }
+}
+
 #main-container {
 	transition: all 0.26s ease;
 }
@@ -150,6 +156,7 @@ body.menuOpen #menu {
     font-size: 0.9em;
     transform: translateY(-150%);
     animation: 7s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0s 1 showMessage;
+    z-index: 11;
 }
 
 .msg.err {
