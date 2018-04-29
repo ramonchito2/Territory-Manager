@@ -44,16 +44,26 @@ else
 
 <?php endif; ?>
 
+<div id="menu-button"></div>
+<nav id="menu">
+	<h2>Menú</h2>
+	<span id="menu-close"></span>
+	<a href="?asignar">Asignar Territorios</a>
+	<a href="?publicadores">Publicadores</a>
+	<a href="?territorios">Territorios</a>
+	<a href="?report">Imprimir Reporte</a>
+</nav>
+
 <section id="main-container">
 
-	<span class="welcome">Welcome <?= $go; ?></span>
-	<h1>Manage Group Territories</h1>
+	<span class="welcome">Bienvenido <?= $go; ?></span>
+	<h1>Territorios - Raytown Spanish</h1>
 
-	<h2>Assign Territory</h2>
+	<h2>Asignar Territorios</h2>
 
 	<?php if( current_user_can('edit_others_pages') ): ?>
 	<select id="group" onchange="groupFilter()">
-		<option>All Groups</option>
+		<option>Todos los grupos</option>
 		<option>Calle 89</option>
 		<option>Crisp</option>
 		<option>Grandview</option>
@@ -64,7 +74,7 @@ else
 
 	<form id="chOut" method="post">
 		<select name="publisher" id="publisher" required>
-			<option value="" disabled selected>Select a publisher...</option>
+			<option value="" disabled selected>Seleccionar un publicador...</option>
 			<?php 
 			foreach($publishers as $publisher): 
 				$pg 	= $publisher['group'];
@@ -81,14 +91,14 @@ else
 			<?php endforeach; ?>
 		</div>
 		<input type="hidden" placeholder="Territory Number(s)">
-		<input type="submit" value="Assign">
+		<input type="submit" value="Asignar">
 	</form>
 
 
 	<?php
 	if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
 
-	<h2>Territories Checked Out</h2>
+	<h2>Territorios Asignados</h2>
 
 	<div id="all-checkedout">
 
@@ -113,9 +123,9 @@ else
 					<?php if( current_user_can('edit_others_pages') ): ?>
 						<span class="ugroup"><?= $t[$key]['group']; ?></span>
 					<?php endif; ?>
-					<i>oldest - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
+					<i>más viejo - <?= time_elapsed_string('@'.$t[$key]['checkedOut'], true); ?></i>
 					<a class="checkin all">
-						<span class="cin"><i class="fa fa-check"></i>in</span> ALL
+						<span class="cin"><i class="fa fa-check"></i>entregar</span> TODO
 					</a>			
 				</div>
 				
@@ -126,7 +136,7 @@ else
 						<div class="terrDetails">
 							<h4 class="tnum">Terr #<?= $tt['terrNum']; ?> - </h4>
 							<a class="checkin">
-								<span class="cin"><i class="fa fa-check"></i>in</span>
+								<span class="cin"><i class="fa fa-check"></i>entregar</span>
 								<span class="details"
 									name="<?= $fullName; ?>"
 									id="<?= $tt['userID']; ?>"
@@ -137,10 +147,10 @@ else
 								<?php
 								date_default_timezone_set("America/Chicago");
 								$daysAgo = time_elapsed_string('@'.$tt['checkedOut']);
-								$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
-								Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
+								$exactX  = date('M d Y \a \l\a\s g:i:s a', $tt['checkedOut']); ?>
+								Entregado <?= $daysAgo; ?> <br>el <?= $exactX; ?>
 								<?php if( $tt['byID'] ):
-									echo '<br>by '. get_user_by('ID', $tt['byID'])->user_nicename;
+									echo '<br>por '. get_user_by('ID', $tt['byID'])->user_nicename;
 								endif; ?>
 							</span>
 						</div>
@@ -156,8 +166,8 @@ else
 		<?php
 		else: ?>
 
-		<h2>No Territories Checked Out</h2>
-		<span>You can check out a territory above.</span>
+		<h2>No Territorios Asignados</h2>
+		<span>Puede asignar un territorio arriba.</span>
 		<?php
 		endif; ?>
 
@@ -167,9 +177,9 @@ else
 
 <div id="popup">
 	<div id="pcontainer">
-		<h3>Nothing to see here...</h3>
-		<span class="yes">Yes</span>
-		<span class="no" onclick="resetPop()">Cancel</span>
+		<h3>Nada que ver aqui...</h3>
+		<span class="yes">Sí</span>
+		<span class="no" onclick="resetPop()">Cancelar</span>
 		<form id="chIn" method="post">
 			<input id="uid" type="hidden" name="uid">
 			<input id="tid" type="hidden" name="tid">

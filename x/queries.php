@@ -96,23 +96,32 @@ function time_elapsed_string($datetime, $wrap = false, $full = false) {
     $diff->d -= $diff->w * 7;
 
     $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
+        'y' => 'año',
+        'm' => 'mes',
+        'w' => 'semana',
+        'd' => 'día',
+        'h' => 'hora',
+        'i' => 'minuto',
+        's' => 'segundo',
+    );
+    $plural = array(
+        'y' => 'años',
+        'm' => 'meses',
+        'w' => 'semanas',
+        'd' => 'días',
+        'h' => 'horas',
+        'i' => 'minutos',
+        's' => 'segundos',
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            $v = $diff->$k . ' ' . ($diff->$k > 1 ? $plural[$k] : $v);
         } else {
             unset($string[$k]);
         }
     }
     if (!$full) $string = array_slice($string, 0, 1);
-    $result = $string ? implode(', ', $string) . ' ago' : 'just now';
+    $result = $string ? 'hace ' . implode(', ', $string) : 'just now';
     if ($wrap)
     	$result = '<span class="ago '.implode(', ', $string).'">'.$result.'</span>';
     return $result;

@@ -360,33 +360,47 @@ span.ago {
     color: black;
 }
 span.ago.second,
-span.ago.seconds {
+span.ago.seconds,
+span.ago.segundo,
+span.ago.segundos {
     background: #00b300;
 }
 span.ago.minute,
-span.ago.minutes {
+span.ago.minutes,
+span.ago.minuto,
+span.ago.minutos {
 	color: #e0dddd;
     background: green;
 }
 span.ago.hour,
-span.ago.hours {
+span.ago.hours,
+span.ago.hora,
+span.ago.horas {
 	color: #e0dddd;
     background: #005f00;
 }
 span.ago.day,
-span.ago.days {
+span.ago.days,
+span.ago.día,
+span.ago.días {
 	background: yellow;
 }
 span.ago.week,
-span.ago.weeks {
+span.ago.weeks,
+span.ago.semana,
+span.ago.semanas {
     background: #d1c600;
 }
 span.ago.month,
-span.ago.months {
+span.ago.months,
+span.ago.mes,
+span.ago.meses {
     background: #ff9400;
 }
 span.ago.year,
-span.ago.years {
+span.ago.years,
+span.ago.año,
+span.ago.años {
     background: red;
 }
 

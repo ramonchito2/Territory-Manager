@@ -20,12 +20,17 @@ if ( $checkingOut ):
 	// INSERT VALID DATA
 	if( $validData ):
 		if ( mysqli_multi_query($conn, $insert_sql) ) {
-		    $msg = "?msg=Territorie(s) " . implode(', ',$terrs) . " were sucessfully assigned.";
+			$terrNumbs = implode(', ',$terrs);
+			if ( count($terrs > 1) ):
+				$msg = "?msg=Territorios " . $terrNumbs . " fueron asignados con éxito.";
+			else:
+				$msg = "?msg=Territorio " . $terrNumbs . " fue asignado con éxito.";
+			endif;
 		} else {
 		    $msg = "?err=Error: " . $insert_sql . mysqli_error($conn);
 		}
 	else:
-		$msg = "?err=Error: Data submitted is invalid. If problem persists, please contact administrator";
+		$msg = "?err=Error: Los datos enviados no son válidos. Si el problema persiste, póngase en contacto con el administrador";
 	endif;
 endif;
 
@@ -56,7 +61,11 @@ if( $checkingIn ):
 		endforeach;
 		// INSERT VALID DATA
 		if ( mysqli_multi_query($conn, $insert_sql) ) {
-		    $msg = get_bloginfo('url')."?msg=Territory(ies) " . $tid . " were sucessfully checked in.";
+			if ( count($terrs > 1) ):
+				$msg = get_bloginfo('url')."?msg=Territorios " . $tid . " fueron asignados con éxito.";
+			else:
+				$msg = get_bloginfo('url')."?msg=Territorio " . $tid . " fue asignado con éxito.";
+			endif;
 		} else {
 		    $msg = get_bloginfo('url')."?err=Error: " . $insert_sql . mysqli_error($conn);
 		}
