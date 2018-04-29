@@ -139,6 +139,9 @@ else
 								$daysAgo = time_elapsed_string('@'.$tt['checkedOut']);
 								$exactX  = date('M jS Y \a\t g:i:s a', $tt['checkedOut']); ?>
 								Checked out <?= $daysAgo; ?> <br>on <?= $exactX; ?>
+								<?php if( $tt['byID'] ):
+									echo '<br>by '. get_user_by('ID', $tt['byID'])->user_nicename;
+								endif; ?>
 							</span>
 						</div>
 					<?php

@@ -10,7 +10,7 @@ if ( $checkingOut ):
 	if (!filter_var($pub, FILTER_VALIDATE_INT) === false):
 	    foreach( $terrs as $terr ):
 	    	if ( !filter_var($terr, FILTER_VALIDATE_INT) === false && $validData ):
-	    		$insert_sql .= "UPDATE territories SET checkedOut = '".$currentTime."', userID_users = '".$pub."' WHERE terrNum = '".$terr."';";
+	    		$insert_sql .= "UPDATE territories SET checkedOut = '".$currentTime."', userID_users = '".$pub."', byID = '".$current_user->ID."' WHERE terrNum = '".$terr."';";
 	    		$validData = true;
 	    	else:
 	    		$validData = false;
@@ -49,7 +49,7 @@ if( $checkingIn ):
 			$t = filter_var($terr, FILTER_VALIDATE_INT);
 			$x = filter_var($time[$n], FILTER_VALIDATE_INT);
 			$insert_sql .= "UPDATE territories ";
-			$insert_sql .= "SET checkedOut = NULL, userID_users = NULL ";
+			$insert_sql .= "SET checkedOut = NULL, userID_users = NULL, byID = NULL ";
 			$insert_sql .= "WHERE terrNum = ".$t." ";
 			$insert_sql .= "AND userID_users = ".$user.";";
 			$insert_sql .= "INSERT INTO log VALUES (NULL,".$user.",".$t.",".$x.",".time().");";

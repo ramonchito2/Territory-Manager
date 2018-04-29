@@ -44,7 +44,7 @@ endif;
 --- creates $territoriesCOd array() */
 $ter_sql = 
 	"
-		SELECT t.checkedOut, t.terrNum, u.firstName, u.lastName, u.userID, u.group
+		SELECT t.checkedOut, t.terrNum, t.byID, u.firstName, u.lastName, u.userID, u.group
 		FROM territories t
 		INNER JOIN users u on t.userID_users = u.userID
 		".$where2."
