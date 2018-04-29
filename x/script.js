@@ -1,8 +1,20 @@
 var $ = jQuery;
 $(document).ready(function(){
 
+	$body = $('body');
+	$mbutton = $('#menu-button');
+	$mclose = $('#menu-close');
+	$menu = $('#menu');
 	$mainContainer = $('#main-container');
 	$popup = $('#popup');
+
+	/* Open-Close Menu */
+	$mbutton.click(function(){
+		$body.addClass('menuOpen');
+	})
+	$mclose.click(function(){
+		$body.removeClass('menuOpen');
+	})
 
 	/* CHECKING IN TERRITORY(IES) */
 	$('a.checkin').click(function(){

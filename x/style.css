@@ -15,6 +15,112 @@ body {
 	display: none !important;
 }
 
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 360px;
+    background: #fafafa;
+    box-shadow: 5px 0px 15px rgba(0,0,0,.24);
+    z-index: 10;
+    transform: translate3d(-100%,0, 0);
+    transition: transform 0.2s cubic-bezier(0.18, 1.15, 0.17, 1.14);
+}
+
+body.menuOpen #menu {
+    transform: translate3d(0,0,0);
+}
+
+#menu h2 {
+    padding: 34px 16px;
+    border-bottom: 1px solid #0000000f;
+    margin: 0;
+    background: #ececec;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+#menu-close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+#menu-close:hover {
+  opacity: 1;
+}
+#menu-close:before, #menu-close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+#menu-close:before {
+  transform: rotate(45deg);
+}
+#menu-close:after {
+  transform: rotate(-45deg);
+}
+
+
+#menu > a {
+    padding: 16px 14px;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    font-size: 1.1em;
+    color: rgba(0,0,0,.87);
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+#menu > a.active {
+    color: #fa7c46;
+}
+
+#menu > a:hover {
+    background: rgba(0,0,0,.1);
+}
+
+#menu-button {
+    position: absolute;
+    top: 40px;
+    left: 110px;
+    font-size: 40px;
+    padding: 0.35em;
+    cursor: pointer;
+    transform: rotate3d(0,0,1,0deg);
+    transition: transform 0.4s ease;
+    transform-origin: center;
+}
+
+#menu-button:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0em;
+    width: 0.7em;
+    height: 0.10em;
+    background: black;
+    box-shadow: 0 0.22em 0 0 black, 0 0.46em 0 0 black;
+}
+
+#menu-button:after {
+    content: 'Menu';
+    font-size: 0.5em;
+    position: absolute;
+    top: 2px;
+    left: 2.2em;
+    text-transform: uppercase;
+    display: none;
+}
+
 #main-container {
 	transition: all 0.26s ease;
 }
