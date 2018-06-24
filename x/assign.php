@@ -1,5 +1,8 @@
 <h2>Asignar Territorios</h2>
 
+<?php // ADDED THE BASIS FOR SENDING EMAILS THROUGH KHPROGRAMS GMAIL
+// include('informOldTerrs'); ?>
+
 <?php if( current_user_can('edit_others_pages') ): ?>
 <select id="group" onchange="groupFilter()">
 	<option>Todos los grupos</option>
