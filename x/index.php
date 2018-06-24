@@ -2,11 +2,8 @@
 
 include('tapplogin.php');
 
-// DB QUERIES GO HERE
-include('queries.php'); 
-
 if( IS_PRODUCTION_SERVER )
-	$version = '?v=1.2';
+	$version = '?v=1.3';
 else
 	$version = null;
 ?>
@@ -46,7 +43,13 @@ else
 
 <?php $view = isset($_GET['view']) ? $_GET['view'] : false; ?>
 
-<div id="menu-button"></div>
+<?php
+// RUN DB QUERIES
+include('queries.php'); ?>
+
+<div class="container">
+	<div id="menu-button"></div>
+</div>
 <nav id="menu">
 	<h2>Menú</h2>
 	<span id="menu-close"></span>

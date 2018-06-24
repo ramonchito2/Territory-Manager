@@ -44,6 +44,8 @@ $checkingIn = isset($_POST['tid']) && isset($_POST['uid']) && isset($_POST['time
 if( $checkingIn or $checkingOut ):
 	include('insert.php');
 	// close msqli inside
+elseif( $view && $view == 'territories' ):
+    include('getAll.php');
 else:
 	include('get.php');
 	mysqli_close($conn);

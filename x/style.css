@@ -546,6 +546,27 @@ span.ago.años {
 	margin-right: .5em;
 }
 
+/* TERRITORY HISTORY */
+.allTerritories {
+    margin: 24px -8px;
+}
+
+.terrHistory {
+    display: inline-block;
+    width: calc(25% - 16px);
+    margin: 8px;
+    padding: 20px;
+    border: 1px solid #0000003d;
+    height: 300px;
+    vertical-align: middle;
+}
+
+.terrHistory span {
+    font-size: 12px;
+    display: block;
+    margin-top: 12px;
+}
+
 @keyframes showMessage {
     0% {
         transform: translateY(-150%);
