@@ -88,10 +88,12 @@ body.menuOpen #menu {
     background: rgba(0,0,0,.1);
 }
 
+.container {
+	max-width: 1024px;
+	margin: 0 auto 24px;
+}
+
 #menu-button {
-    position: absolute;
-    top: 40px;
-    left: 110px;
     font-size: 40px;
     padding: 0.35em;
     cursor: pointer;
