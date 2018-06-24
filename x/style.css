@@ -194,13 +194,13 @@ h3 {
 }
 
 select#group {
-	display: inline-block;
-	width: 40%;
+	display: block;
+	width: 100%;
 	padding: 0.8em;
 	font-size: 1em;
 	margin-bottom: 1em;
-	float: right;
-	margin-top: -56px;
+	/* float: right; */
+	/* margin-top: -56px; */
 	font-family: Roboto, sans-serif;
 }
 
