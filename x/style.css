@@ -293,10 +293,20 @@ input[type="submit"] {
 	font-weight: bold;
 	background: #f47c48;
 }
+#terr-select label:hover:before {
+	background: #ffc6af;
+}
 
 @media( max-width: 320px ) {
 	#terr-select label {
 		width: 25%;
+	}
+}
+@media( max-width: 640px) {
+	#terr-select label:hover:before {
+		color: #8c8c8c;
+		font-weight: normal;
+		background: transparent;
 	}
 }
 
