@@ -61,7 +61,7 @@ include('queries.php'); ?>
 
 <section id="main-container">
 
-	<span class="welcome">Bienvenido <?= $go; ?></span>
+	<span class="welcome">Bienvenido <?= $current_user->user_firstname; ?></span>
 	<h1>Territorios - Raytown Spanish</h1>
 
 	<?php

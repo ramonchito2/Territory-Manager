@@ -1,36 +1,4 @@
 <?php
-// GET RESULTS FOR...
-$group = null;
-
-// GROUP OVERSEERS
-$current_user = wp_get_current_user();
-$go = $current_user->user_firstname;
-switch ($go) {
-	case 'Jirrod':
-		$group = 'Calle 89';
-		break;
-	
-	case 'Jose':
-		$group = 'Calle 89';
-		break;
-	
-	case 'Raul':
-		$group = 'Grandview';
-		break;
-	
-	case 'Josue':
-		$group = 'Crisp';
-		break;
-	
-	case 'Enrique':
-		$group = 'Salon';
-		break;
-	
-	case 'Armando':
-		$group = 'Harris';
-		break;
-}
-
 // OPEN DB CONNECTION
 $conn = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 if (!$conn):

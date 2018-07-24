@@ -1,4 +1,26 @@
 <?php
+/* GET CURRENT USER'S GROUP  */
+$group = null;
+$current_user = wp_get_current_user();
+$email = $current_user->user_email;
+$group_sql = "SELECT * FROM users WHERE email = '".$email."';";
+$group_result = mysqli_query($conn, $group_sql);
+if (mysqli_num_rows($group_result) > 0):
+    while($row = mysqli_fetch_assoc($group_result)):
+        $group = $row["group"];
+    endwhile;
+endif;
+
+/* GET ALL GROUPS  */
+$allGroups = [];
+$allGroups_sql = "SELECT DISTINCT `group` FROM `users` ORDER BY `group` ASC;";
+$allGroups_result = mysqli_query($conn, $allGroups_sql);
+if (mysqli_num_rows($allGroups_result) > 0):
+    while($row = mysqli_fetch_assoc($allGroups_result)):
+        $allGroups[] = $row["group"];
+    endwhile;
+endif;
+
 /* CHECK USER ROLE 
 -- change WHERE clause if editor or admin */
 if( !current_user_can('edit_others_pages') ):

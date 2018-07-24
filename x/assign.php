@@ -5,12 +5,10 @@
 
 <?php if( current_user_can('edit_others_pages') ): ?>
 <select id="group" onchange="groupFilter()">
-	<option>Todos los grupos</option>
-	<option>Calle 89</option>
-	<option>Crisp</option>
-	<option>Grandview</option>
-	<option>Harris</option>
-	<option>Stark</option>
+	<option all>Todos los grupos</option>
+	<?php foreach($allGroups as $group): ?>
+		<option><?= $group; ?></option>
+	<?php endforeach; ?>
 </select>
 <?php endif; ?>
 
