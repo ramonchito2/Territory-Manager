@@ -77,7 +77,7 @@ $(document).ready(function(){
 	            value = values[i].getAttribute("group");
 	            if (value) {
 	            	// console.log(filter);
-	                if( filter == "ALL GROUPS" ) {
+	                if( select.selectedOptions[0].hasAttribute('all') ) {
 	                	values[i].classList.remove('hidden');
 	                } else {
 	                	valueMatch = value.toUpperCase().indexOf(filter) > -1;
