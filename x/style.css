@@ -100,6 +100,7 @@ body.menuOpen #menu {
     transform: rotate3d(0,0,1,0deg);
     transition: transform 0.4s ease;
     transform-origin: center;
+    display: inline-block;
 }
 
 #menu-button:before {
@@ -553,11 +554,11 @@ span.ago.años {
 
 .terrHistory {
     display: inline-block;
-    width: calc(25% - 16px);
+    width: 100%;
     margin: 8px;
     padding: 20px;
     border: 1px solid #0000003d;
-    height: 300px;
+    height: auto;
     vertical-align: middle;
 }
 
