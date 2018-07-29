@@ -6,6 +6,8 @@ if( IS_PRODUCTION_SERVER )
 	$version = '?v=1.3';
 else
 	$version = null;
+
+date_default_timezone_set("America/Chicago");
 ?>
 
 <!DOCTYPE html>
