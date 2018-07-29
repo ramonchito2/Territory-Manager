@@ -92,7 +92,7 @@ if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
 							date_default_timezone_set("America/Chicago");
 							$daysAgo = time_elapsed_string('@'.$tt['checkedOut']);
 							$exactX  = date('M d Y \a \l\a\s g:i:s a', $tt['checkedOut']); ?>
-							Entregado <?= $daysAgo; ?> <br>el <?= $exactX; ?>
+							Asignado <?= $daysAgo; ?> <br>el <?= $exactX; ?>
 							<?php if( $tt['byID'] ):
 								echo '<br>por '. get_user_by('ID', $tt['byID'])->display_name;
 							endif; ?>
