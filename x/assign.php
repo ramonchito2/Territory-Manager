@@ -6,8 +6,9 @@
 <?php if( current_user_can('edit_others_pages') ): ?>
 <select id="group" onchange="groupFilter()">
 	<option all>Todos los grupos</option>
-	<?php foreach($allGroups as $group): ?>
-		<option><?= $group; ?></option>
+	<?php foreach($allGroups as $g): ?>
+		<?php $selected = $g === $group ? ' selected' : ''; ?>
+		<option<?= $selected; ?>><?= $g; ?></option>
 	<?php endforeach; ?>
 </select>
 <?php endif; ?>
@@ -20,14 +21,16 @@
 			$pg 	= $publisher['group'];
 			$pid	= $publisher['id'];
 			$pname 	= $publisher['last'] . ', ' . $publisher['first']; 
+			$class = $group && $pg !== $group ? "hidden" : '';
 		?>
-		<option	group="<?= $pg; ?>"	value="<?= $pid; ?>"><?= $pname; ?></option>
+		<option	group="<?= $pg; ?>"	value="<?= $pid; ?>" class="<?= $class; ?>"><?= $pname; ?></option>
 		<?php endforeach; ?>
 	</select>
 	<div id="terr-select">
 		<?php foreach($territories as $territory): ?>
+		<?php $class = $group && $territory['group'] !== $group ? "hidden" : ''; ?>
 		<input type="checkbox" name="terrs[]" value="<?= $territory['id']; ?>" id="terr<?= $territory['id']; ?>">
-		<label group="<?= $territory['group']; ?>" for="terr<?= $territory['id']; ?>" data-attr="<?= $territory['id']; ?>"></label>
+		<label group="<?= $territory['group']; ?>" for="terr<?= $territory['id']; ?>" class="<?= $class; ?>" data-attr="<?= $territory['id']; ?>"></label>
 		<?php endforeach; ?>
 	</div>
 	<input type="hidden" placeholder="Territory Number(s)">
@@ -54,9 +57,10 @@ if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
 
 	foreach ($tco as $t): 
 		reset($t);
-		$key = key($t); ?>
+		$key = key($t); 
+		$class = $group && $t[$key]['group'] !== $group ? " hidden" : '';?>
 
-		<div group="<?= $t[$key]['group']; ?>" class="userWterrs">
+		<div group="<?= $t[$key]['group']; ?>" class="userWterrs<?= $class; ?>">
 			<div class="user">
 				<?php $fullName = $t[$key]['firstName'] .' '. $t[$key]['lastName']; ?>
 				<h3><?= $fullName; ?></h3>
