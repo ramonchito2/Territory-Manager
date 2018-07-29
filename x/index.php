@@ -56,9 +56,10 @@ include('queries.php'); ?>
 	<h2>Menú</h2>
 	<span id="menu-close"></span>
 	<a href="?view=assign"<?= ($view == 'assign' || $view == false) ? 'class="active"' : null; ?>>Asignar Territorios</a>
+	<a href="?view=groups"<?= $view == 'groups' ? 'class="active"' : null; ?>>Groupos</a>
 	<a href="?view=publishers"<?= $view == 'publishers' ? 'class="active"' : null; ?>>Publicadores</a>
 	<a href="?view=territories"<?= $view == 'territories' ? 'class="active"' : null; ?>>Territorios</a>
-	<a href="?view=report"<?= $view == 'report' ? 'class="active"' : null; ?>>Imprimir Reporte</a>
+	<?php /* <a href="?view=report"<?= $view == 'report' ? 'class="active"' : null; ?>>Imprimir Reporte</a> */ ?>
 </nav>
 
 <section id="main-container">
@@ -71,6 +72,10 @@ include('queries.php'); ?>
 			switch ($view) {
 				case 'assign':
 					include('assign.php');
+					break;
+				
+				case 'groups':
+					include('groups.php');
 					break;
 				
 				case 'publishers':
