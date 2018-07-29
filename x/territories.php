@@ -1,12 +1,3 @@
-<?php
-// This count should come from the db
-// $territoriesAll; $numOfTerrs;
-// var_dump($territoriesAll);
-date_default_timezone_set("America/Chicago");
-
-?>
-
-
 <h2>Territorios de Raytown Spanish</h2>
 
 <div class="allTerritories">
