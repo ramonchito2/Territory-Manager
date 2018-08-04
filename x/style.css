@@ -177,7 +177,7 @@ span.welcome {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-family: Roboto, sans-serif;
     border-top: 0.2em solid #f47c48;
     margin-top: 0;
@@ -554,13 +554,13 @@ span.ago.años {
 
 /* TERRITORY HISTORY */
 .allTerritories {
-    margin: 24px -8px;
+    /* margin: 24px -8px; */
 }
 
 .terrHistory {
     display: inline-block;
     width: 100%;
-    margin: 8px;
+    margin-bottom: 8px;
     padding: 20px;
     border: 1px solid #0000003d;
     height: auto;
