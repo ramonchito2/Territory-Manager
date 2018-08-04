@@ -8,7 +8,7 @@ $view = isset($_GET['view']) ? $_GET['view'] : false;
 include('queries.php');
 
 if( IS_PRODUCTION_SERVER )
-	$version = '?v=1.4b';
+	$version = '?v=1.4c';
 else
 	$version = null;
 

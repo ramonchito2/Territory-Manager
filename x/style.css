@@ -601,6 +601,21 @@ span.ago.años {
     background: #fafafa;
 }
 
+/* PUBLISHER PAGE */
+#all-publishers {
+    margin-top: 40px;
+}
+#all-publishers .pub {
+    padding: 8px;
+}
+
+#all-publishers .pub:nth-child(odd) {
+    background: #dadada;
+}
+
+#all-publishers .pub:nth-child(even) {
+    background: #fafafa;
+}
 @keyframes showMessage {
     0% {
         transform: translateY(-150%);
