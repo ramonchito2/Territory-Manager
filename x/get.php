@@ -22,6 +22,16 @@ if( !$view || $view == 'assign' ):
         endwhile;
     endif;
 
+    /* GET ALL GROUPS  */
+    $allGroups = [];
+    $allGroups_sql = "SELECT DISTINCT `group` FROM `users` ORDER BY `group` ASC;";
+    $allGroups_result = mysqli_query($conn, $allGroups_sql);
+    if (mysqli_num_rows($allGroups_result) > 0):
+        while($row = mysqli_fetch_assoc($allGroups_result)):
+            $allGroups[] = $row["group"];
+        endwhile;
+    endif;
+
     /* GET CHECKED-IN TERRITORIES
     --- creates $territories array() */
     $ter_sql = "SELECT * FROM territories ".$where." AND `checkedOut` IS NULL;";
@@ -73,18 +83,6 @@ if( $view == 'territories' ):
     if (mysqli_num_rows($ter_result) > 0):
         while($row = mysqli_fetch_assoc($ter_result)):
             $territoriesAll[] = $row;
-        endwhile;
-    endif;
-endif;
-
-if( $view == 'groups' || $view == 'assign' || !$view ):
-    /* GET ALL GROUPS  */
-    $allGroups = [];
-    $allGroups_sql = "SELECT DISTINCT `group` FROM `users` ORDER BY `group` ASC;";
-    $allGroups_result = mysqli_query($conn, $allGroups_sql);
-    if (mysqli_num_rows($allGroups_result) > 0):
-        while($row = mysqli_fetch_assoc($allGroups_result)):
-            $allGroups[] = $row["group"];
         endwhile;
     endif;
 endif;

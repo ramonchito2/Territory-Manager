@@ -573,6 +573,34 @@ span.ago.años {
     margin-top: 12px;
 }
 
+/* GROUPS PAGE */
+#all-groups {
+    margin-top: 40px;
+}
+#all-groups .group {
+    padding: 0px 16px 0;
+    margin-bottom: 40px;
+    border-left: 2px solid #989898;
+}
+#all-groups .group h2 {
+    margin: 0 0 0px -18px;
+    background: white;
+    padding: 0px 0 16px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+#all-groups .pub {
+    padding: 8px;
+}
+
+#all-groups .pub:nth-child(odd) {
+    background: #dadada;
+}
+
+#all-groups .pub:nth-child(even) {
+    background: #fafafa;
+}
+
 @keyframes showMessage {
     0% {
         transform: translateY(-150%);
