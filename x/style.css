@@ -248,16 +248,11 @@ input[type="submit"] {
     background-color: #f47c48;
     border: 1px solid #c23b00;
     font-size: 0.9em;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff0000+0,ff4444+94,ff5656+100 */
     font-weight: bold;
     font-family: Roboto, sans-serif;
     color: white;
     cursor: pointer;
-     /* Old browsers */
-     /* FF3.6-15 */
-     /* Chrome10-25,Safari5.1-6 */
-     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-     /* IE6-9 */
+    -webkit-appearance: none;
 }
 
 #terr-select {
