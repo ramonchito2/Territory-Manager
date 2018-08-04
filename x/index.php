@@ -2,6 +2,11 @@
 
 include('tapplogin.php');
 
+$view = isset($_GET['view']) ? $_GET['view'] : false;
+
+// RUN DB QUERIES
+include('queries.php');
+
 if( IS_PRODUCTION_SERVER )
 	$version = '?v=1.3';
 else
@@ -42,12 +47,6 @@ date_default_timezone_set("America/Chicago");
 	<div class="<?= $cls; ?>"><?= $msg; ?></div>
 
 <?php endif; ?>
-
-<?php $view = isset($_GET['view']) ? $_GET['view'] : false; ?>
-
-<?php
-// RUN DB QUERIES
-include('queries.php'); ?>
 
 <div class="container">
 	<div id="menu-button"></div>
