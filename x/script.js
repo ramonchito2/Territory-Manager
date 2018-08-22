@@ -50,11 +50,14 @@ $(document).ready(function(){
 	/* Open Popup */
 	openPop = function(msg,name,tid,id,time) {
 		$mainContainer.addClass('blur');
-		$popup.addClass('show')
-			.find('h3').text(msg).end()
+		$popup.addClass('show');
+
+		if( msg !== "New Pub" ) {
+			$popup.find('h3').text(msg).end()
 			.find('form #uid').val(id).end()
 			.find('form #tid').val(tid).end()
 			.find('form #time').val(time);
+		}
 	}
 
 	/* Resets popup form and hides stuff */

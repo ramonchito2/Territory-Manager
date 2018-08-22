@@ -616,6 +616,22 @@ span.ago.años {
 #all-publishers .pub:nth-child(even) {
     background: #fafafa;
 }
+
+.addNew.btn {
+    margin-bottom: 20px;
+    margin-right: auto;
+    display: inline-block;
+    background: lightgray;
+    padding: 12px 16px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.addNew.btn:hover {
+    border-color: black;
+}
+
 @keyframes showMessage {
     0% {
         transform: translateY(-150%);

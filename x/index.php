@@ -8,7 +8,7 @@ $view = isset($_GET['view']) ? $_GET['view'] : false;
 include('queries.php');
 
 if( IS_PRODUCTION_SERVER )
-	$version = '?v=1.4c';
+	$version = '?v=<1 class="4c"></1>';
 else
 	$version = null;
 
@@ -100,18 +100,6 @@ date_default_timezone_set("America/Chicago");
 
 </section>
 
-<div id="popup">
-	<div id="pcontainer">
-		<h3>Nada que ver aqui...</h3>
-		<span class="yes">Sí</span>
-		<span class="no" onclick="resetPop()">Cancelar</span>
-		<form id="chIn" method="post">
-			<input id="uid" type="hidden" name="uid">
-			<input id="tid" type="hidden" name="tid">
-			<input id="time" type="hidden" name="time">
-		</form>
-	</div>
-</div>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
     <defs>
         <filter id="blur-filter">

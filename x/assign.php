@@ -116,3 +116,16 @@ if( isset($territoriesCOd) && ! empty($territoriesCOd) ): ?>
 	endif; ?>
 
 </div>
+
+<div id="popup">
+	<div id="pcontainer">
+		<h3>Nada que ver aqui...</h3>
+		<span class="yes">Sí</span>
+		<span class="no" onclick="resetPop()">Cancelar</span>
+		<form id="chIn" method="post">
+			<input id="uid" type="hidden" name="uid">
+			<input id="tid" type="hidden" name="tid">
+			<input id="time" type="hidden" name="time">
+		</form>
+	</div>
+</div>
